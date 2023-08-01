@@ -1,6 +1,16 @@
 <h2>Add channel</h2>
 <%= render partial: "channels/form", locals: { channel: Channel.new } %>
 <h2>Channels</h2>
-<p><%= @channels.count %></p>
+<p><%= @channels.count %> channels</p>
+<ul>
+  <% @channels.each do |channel| %>
+    <li><%= link_to channel.title, channel %></li>
+  <% end %>
+</ul>
 <h2>Items</h2>
-<p><%= @items.count %></p>
+<p><%= @items.count %> items</p>
+<ul>
+  <% @items.each do |item| %>
+    <li><%= link_to item.title, item.url %></li>
+  <% end %>
+</ul>
