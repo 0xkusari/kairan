@@ -10,7 +10,14 @@ class Channel < ApplicationRecord
   before_validation :set_title
 
   def set_title
-    doc = Nokogiri::XML.parse(HTTP.get(url).to_s)
-    self.title = doc.xpath("//channel/title").text
+    feed = Feedjira.parse(HTTP.get(url).to_s)
+    self.title = feed.title
+  end
+
+  def fetch_items
+    feed = Feedjira.parse(HTTP.get(url).to_s)
+    feed.entries.sort_by(&:published).each do |entry|
+      self.items.create(title: entry.title, url: entry.url)
+    end
   end
 end
