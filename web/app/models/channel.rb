@@ -1,4 +1,6 @@
 class Channel < ApplicationRecord
+  has_many :items
+
   validates :title, presence: true
   validates :url, presence: true, uniqueness: true, length: { in: 1..8000 }
   validates :category, presence: true

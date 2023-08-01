@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_01_001304) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_01_005603) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -24,4 +24,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_01_001304) do
     t.index ["url"], name: "index_channels_on_url", unique: true
   end
 
+  create_table "items", force: :cascade do |t|
+    t.bigint "channel_id"
+    t.string "title", null: false
+    t.string "url", limit: 8000, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["channel_id", "url"], name: "index_items_on_channel_id_and_url", unique: true
+    t.index ["channel_id"], name: "index_items_on_channel_id"
+  end
+
+  add_foreign_key "items", "channels"
 end
