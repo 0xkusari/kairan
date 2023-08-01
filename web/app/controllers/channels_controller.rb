@@ -11,5 +11,6 @@ class ChannelsController < ApplicationController
 
   def show
     @channel = Channel.find(params[:channel_id])
+    @items = @channel.items.order(id: :desc).limit(20)
   end
 end

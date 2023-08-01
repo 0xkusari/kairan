@@ -1,2 +1,8 @@
 <h2><%= @channel.title %></h2>
 <p><%= link_to @channel.url, @channel.url %></p>
+<h3><%= @channel.items.count %> items</h3>
+<ul>
+  <% @items.each do |item| %>
+    <li><%= link_to item.title, item.url %></li>
+  <% end %>
+</ul>
