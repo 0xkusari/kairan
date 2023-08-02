@@ -11,6 +11,7 @@ gem "importmap-rails"
 gem "jbuilder"
 gem "pg"
 gem "puma", "~> 5.0"
+gem "redis", "~> 5.0"
 gem "sprockets-rails"
 gem "stimulus-rails"
 gem "turbo-rails"
@@ -21,6 +22,7 @@ group :development, :test do
 end
 
 group :development do
+  gem "dockerfile-rails", ">= 1.5"
   gem "web-console"
 end
 
@@ -29,7 +31,3 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
-
-gem "dockerfile-rails", ">= 1.5", :group => :development
-
-gem "redis", "~> 5.0"
