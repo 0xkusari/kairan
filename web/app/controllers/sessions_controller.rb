@@ -5,7 +5,10 @@ class SessionsController < ApplicationController
   before_action :verify_g_csrf_token, only: :create
 
   def create
-    payload = Google::Auth::IDTokens.verify_oidc(params[:credential], aud: "195008300544-l5fjtt5i5dboisa5k09pe94dhu8c7gk1.apps.googleusercontent.com")
+    payload = Google::Auth::IDTokens.verify_oidc(
+      params[:credential],
+      aud: Rails.application.credentials.google_auth_app.client_id
+    )
     user = User.find_or_initialize_by(email: payload["email"])
     user.name = payload["email"].split("@").first
     user.icon_url = payload["picture"]
