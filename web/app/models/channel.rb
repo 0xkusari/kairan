@@ -7,11 +7,12 @@ class Channel < ApplicationRecord
 
   enum :category, { general:0, blog: 1, diary: 2, podcast: 3, vlog: 4, news: 5 }
 
-  before_validation :set_title
+  before_validation :set_title_and_icon_url
 
-  def set_title
+  def set_title_and_icon_url
     feed = Feedjira.parse(HTTP.get(url).to_s)
     self.title = feed.title
+    self.icon_url = feed&.image&.url.presence if feed.respond_to?(:image)
   end
 
   def fetch_items
