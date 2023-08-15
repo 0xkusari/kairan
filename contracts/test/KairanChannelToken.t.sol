@@ -14,7 +14,6 @@ contract KairaChannelTokenTest is IERC721Receiver, Test {
 
     function test_Mint() public {
         uint256 tokenId = token.mint(1, 3, "https://example.com/feed", "https://example.com/images/1.jpg", "example.com world");
-        console2.log("tokenId: %d", tokenId);
         assertEq(tokenId, 1);
     }
 
